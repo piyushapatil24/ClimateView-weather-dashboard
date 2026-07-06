@@ -7,6 +7,8 @@ import Loading from "./components/Loading";
 import {
   getWeather,
   getForecast,
+  getWeatherByCoords,
+  getForecastByCoords,
 } from "./services/weatherApi";
 
 function App() {
@@ -46,7 +48,10 @@ function App() {
           Weather Dashboard
         </h1>
 
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar
+  onSearch={handleSearch}
+  onLocation={handleCurrentLocation}
+/>
 
         {loading && <Loading />}
 
