@@ -82,13 +82,23 @@ function App() {
     >
       <div className="max-w-6xl mx-auto px-5 py-10">
         <div className="flex justify-between items-center mb-8">
-          <h1
-            className={`text-5xl font-bold ${
-              darkMode ? "text-white" : "text-slate-900"
-            }`}
-          >
-            Weather Dashboard
-          </h1>
+          <div>
+  <h1
+    className={`text-5xl font-bold ${
+      darkMode ? "text-white" : "text-slate-900"
+    }`}
+  >
+    🌤 ClimateView
+  </h1>
+
+  <p
+    className={`mt-2 text-lg ${
+      darkMode ? "text-gray-400" : "text-gray-600"
+    }`}
+  >
+    Real-Time Weather Dashboard
+  </p>
+</div>
 
           <button
             onClick={() => setDarkMode(!darkMode)}
@@ -101,6 +111,7 @@ function App() {
         <SearchBar
           onSearch={handleSearch}
           onLocation={handleCurrentLocation}
+          darkMode={darkMode}
         />
 
         {loading && <Loading />}
@@ -113,8 +124,13 @@ function App() {
 
         {weather && !loading && (
           <>
-            <WeatherCard weather={weather} />
-            <Forecast forecast={forecast} />
+            <WeatherCard
+             weather={weather}
+             darkMode={darkMode} />
+            <Forecast
+  forecast={forecast}
+  darkMode={darkMode}
+/>
           </>
         )}
       </div>

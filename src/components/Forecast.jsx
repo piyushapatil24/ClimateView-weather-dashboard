@@ -1,12 +1,15 @@
-function Forecast({ forecast }) {
+function Forecast({ forecast, darkMode }) {
   if (!forecast) return null;
 
-  // One forecast per day (every 8th item ≈ 24 hours)
   const dailyForecast = forecast.list.filter((_, index) => index % 8 === 0);
 
   return (
     <div className="mt-10">
-      <h2 className="text-2xl font-bold text-white mb-5">
+      <h2
+        className={`text-2xl font-bold mb-5 ${
+          darkMode ? "text-white" : "text-slate-900"
+        }`}
+      >
         5-Day Forecast
       </h2>
 
@@ -14,9 +17,13 @@ function Forecast({ forecast }) {
         {dailyForecast.slice(0, 5).map((day) => (
           <div
             key={day.dt}
-            className="bg-slate-800 rounded-xl p-5 text-center text-white"
+            className={`rounded-xl p-5 text-center shadow-lg ${
+              darkMode
+                ? "bg-slate-800 text-white"
+                : "bg-white text-slate-900"
+            }`}
           >
-            <h3 className="font-semibold">
+            <h3 className="font-bold">
               {new Date(day.dt_txt).toLocaleDateString("en-US", {
                 weekday: "short",
               })}
@@ -25,14 +32,14 @@ function Forecast({ forecast }) {
             <img
               className="mx-auto"
               src={`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
-              alt="icon"
+              alt="Weather"
             />
 
             <p className="capitalize text-sm">
               {day.weather[0].description}
             </p>
 
-            <h2 className="text-2xl font-bold mt-2">
+            <h2 className="text-3xl font-bold mt-2">
               {Math.round(day.main.temp)}°C
             </h2>
           </div>
